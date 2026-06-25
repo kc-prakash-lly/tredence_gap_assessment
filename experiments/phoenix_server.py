@@ -19,5 +19,5 @@ app = px.launch_app(use_temp_dir=False)
 print(f"Phoenix running at http://localhost:6006")
 print(f"Data persisted at: {_storage_dir}/phoenix.db")
 
-while True:
-    time.sleep(3600)
+#keep it alive
+input("Press Enter to exit...")
