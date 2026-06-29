@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is retrieval-augmented generation?",
+    "ground_truth": "Retrieval-augmented generation (RAG) is a technique that combines information retrieval with text generation, allowing LLMs to reference external knowledge bases."
+  },
+  {
+    "question": "What is a vector database?",
+    "ground_truth": "A vector database stores high-dimensional embedding vectors and enables fast similarity search using distance metrics like cosine similarity."
+  },
+  {
+    "question": "What is chunking in RAG?",
+    "ground_truth": "Chunking is the process of splitting source documents into smaller pieces before embedding them, so that the retriever can return focused, relevant passages."
+  }
+]
