@@ -1,3 +1,10 @@
 .venv*/
 .env
+gap_assessment_agent/rag_adk_agent/.env
 phoenix_storage/
+
+__pycache__/
+.adk/
+
+Personal/
+
