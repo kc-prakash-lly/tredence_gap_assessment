@@ -17,4 +17,6 @@ dependencies = [
     "opentelemetry-exporter-otlp>=1.42.1",
     "pydantic-ai>=0.0.5",
     "python-dotenv>=1.2.2",
+    "ragas>=0.2.0",
+    "jsonref>=1.1.0",
 ]
