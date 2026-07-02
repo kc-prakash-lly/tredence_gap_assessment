@@ -883,6 +883,23 @@ wheels = [
 ]
 
 [[package]]
+name = "google-cloud-discoveryengine"
+version = "0.20.1"
+source = { registry = "https://elilillyco.jfrog.io/artifactory/api/pypi/Lilly-Python/simple" }
+dependencies = [
+    { name = "google-api-core", extra = ["grpc"] },
+    { name = "google-auth" },
+    { name = "grpc-google-iam-v1" },
+    { name = "grpcio" },
+    { name = "proto-plus" },
+    { name = "protobuf" },
+]
+sdist = { url = "https://elilillyco.jfrog.io/artifactory/api/pypi/Lilly-Python/packages/packages/a8/d4/cf0ec3d9be32bf5747bd0f7b2ddecc185cfb2c1e9e4ed0996a4fbf0a0d7e/google_cloud_discoveryengine-0.20.1.tar.gz", hash = "sha256:019aed4f8b0ce00c5c71a384fed3f0d2f5988dae737988ce9be03429d9e9dea6" }
+wheels = [
+    { url = "https://elilillyco.jfrog.io/artifactory/api/pypi/Lilly-Python/packages/packages/62/06/0d045239723f9247b8df240cefa666c36019efa0df1b3ca3c7e7a46dadbb/google_cloud_discoveryengine-0.20.1-py3-none-any.whl", hash = "sha256:8f9260dcbfb9361750be146248e7761f600179fbf3cdaabc1474fb132cef5bac" },
+]
+
+[[package]]
 name = "google-cloud-logging"
 version = "3.16.0"
 source = { registry = "https://elilillyco.jfrog.io/artifactory/api/pypi/Lilly-Python/simple" }
@@ -3356,6 +3373,7 @@ dependencies = [
     { name = "arize-phoenix" },
     { name = "arize-phoenix-otel" },
     { name = "google-adk" },
+    { name = "google-cloud-discoveryengine" },
     { name = "google-cloud-logging" },
     { name = "google-genai" },
     { name = "ipykernel" },
@@ -3372,6 +3390,7 @@ requires-dist = [
     { name = "arize-phoenix", extras = ["pydantic-ai"], specifier = ">=17.9.0" },
     { name = "arize-phoenix-otel", specifier = ">=0.16.1" },
     { name = "google-adk", specifier = ">=2.3.0" },
+    { name = "google-cloud-discoveryengine", specifier = ">=0.13.0" },
     { name = "google-cloud-logging", specifier = ">=3.16.0" },
     { name = "google-genai", specifier = ">=2.10.0" },
     { name = "ipykernel", specifier = ">=7.3.0" },
