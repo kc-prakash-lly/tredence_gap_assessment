@@ -28,6 +28,11 @@ logger = logging.getLogger(__name__)
 # How many chunks to request per sub-query
 _TOP_K = 5
 
+# Minimum retrieval score to keep a chunk. Chunks with score == 0.0 are kept
+# only when the DE serving config has no ranker (all scores are 0); once a
+# ranker is enabled, anything below this threshold is discarded.
+_SCORE_THRESHOLD = 0.6
+
 
 class EvidenceAgent(BaseAgent):
     """Retrieves evidence chunks for all sub-queries and writes them to state."""
@@ -91,6 +96,7 @@ class EvidenceAgent(BaseAgent):
         # ── Search DE for each sub-query and deduplicate ─────────────────────
         seen: set[str] = set()
         all_chunks = []
+        all_scores_zero = True  # track whether ranker is returning real scores
 
         for query in sub_queries:
             try:
@@ -106,10 +112,23 @@ class EvidenceAgent(BaseAgent):
                 continue
 
             for chunk in chunks:
+                if chunk.retrieval_score != 0.0:
+                    all_scores_zero = False
                 key = f"{chunk.doc_id}||{chunk.text[:100]}"
                 if key not in seen:
                     seen.add(key)
                     all_chunks.append(chunk)
+
+        # Apply threshold only when the ranker is returning real scores.
+        # If every score is 0.0 the serving config has no ranker enabled yet —
+        # skip filtering so we don't discard all results silently.
+        if not all_scores_zero:
+            before = len(all_chunks)
+            all_chunks = [c for c in all_chunks if c.retrieval_score >= _SCORE_THRESHOLD]
+            logger.info(
+                "Score threshold %.2f: kept %d / %d chunk(s).",
+                _SCORE_THRESHOLD, len(all_chunks), before,
+            )
 
         # ── Write to state ────────────────────────────────────────────────────
         ctx.session.state["evidence_chunks"] = [
